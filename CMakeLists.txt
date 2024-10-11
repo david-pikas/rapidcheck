@@ -93,8 +93,9 @@ if(RC_ENABLE_INSTALL)
       RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} # This is for Windows
       ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
       LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+      COMPONENT ${PROJECT_NAME}
   )
-  install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} COMPONENT ${PROJECT_NAME})
 endif()
 
 # On Windows under MinGW, random_device provides no entropy,
@@ -124,7 +125,7 @@ add_subdirectory(extras)
 
 # Install the export file specifying all the targets for RapidCheck
 if(RC_ENABLE_INSTALL)
-  install(EXPORT rapidcheckConfig DESTINATION share/rapidcheck/cmake)
+  install(EXPORT rapidcheckConfig DESTINATION share/rapidcheck/cmake COMPONENT ${PROJECT_NAME})
   export(EXPORT rapidcheckConfig FILE rapidcheckConfig.cmake)
 endif()
 
@@ -144,5 +145,6 @@ configure_file(
 if(RC_ENABLE_INSTALL)
   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+    COMPONENT ${PROJECT_NAME}
     )
 endif()

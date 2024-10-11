@@ -10,8 +10,8 @@ target_include_directories(rapidcheck_gmock INTERFACE
 # An INTERFACE library does not need to install anything but its headers
 # and information on its targets.
 if(RC_ENABLE_INSTALL)
-  install(TARGETS rapidcheck_gmock EXPORT rapidcheckConfig)
-  install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+  install(TARGETS rapidcheck_gmock EXPORT rapidcheckConfig COMPONENT ${PROJECT_NAME})
+  install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} COMPONENT ${PROJECT_NAME})
 endif()
 
 if (RC_ENABLE_TESTS)
@@ -34,5 +34,6 @@ configure_file(
 if(RC_ENABLE_INSTALL)
   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+    COMPONENT ${PROJECT_NAME}
     )
 endif()
