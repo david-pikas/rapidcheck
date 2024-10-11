@@ -9,8 +9,10 @@ target_include_directories(rapidcheck_boost_test INTERFACE
 
 # An INTERFACE library does not need to install anything but its headers
 # and information on its targets.
-install(TARGETS rapidcheck_boost_test EXPORT rapidcheckConfig)
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+if(RC_ENABLE_INSTALL)
+  install(TARGETS rapidcheck_boost_test EXPORT rapidcheckConfig)
+  install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+endif()
 
 set(PKG_CONFIG_REQUIRES "rapidcheck")
 set(PKG_CONFIG_DESCRIPTION_SUMMARY "boost_test headers for rapidcheck")

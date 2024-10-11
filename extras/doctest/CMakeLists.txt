@@ -9,8 +9,10 @@ target_include_directories(rapidcheck_doctest INTERFACE
 
 # An INTERFACE library does not need to install anything but its headers
 # and information on its targets.
-install(TARGETS rapidcheck_doctest EXPORT rapidcheckConfig)
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+if(RC_ENABLE_INSTALL)
+  install(TARGETS rapidcheck_doctest EXPORT rapidcheckConfig)
+  install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+endif()
 
 set(PKG_CONFIG_REQUIRES "rapidcheck")
 set(PKG_CONFIG_DESCRIPTION_SUMMARY "doctest headers for rapidcheck")
@@ -25,6 +27,8 @@ configure_file(
   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
   )
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
-  )
+if(RC_ENABLE_INSTALL)
+  install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc"
+    DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig
+    )
+endif()
